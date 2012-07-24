@@ -31,7 +31,7 @@ module SimpleNavigation
       end
 
       def include_sub_navigation?(item)
-        consider_sub_navigation?(item) && expand_sub_navigation?(item)
+        !item.disable_item && consider_sub_navigation?(item) && expand_sub_navigation?(item)
       end
 
       def render_sub_navigation_for(item)
@@ -71,7 +71,7 @@ module SimpleNavigation
       # does not render the final breadcrumb as a link when instructed
       # not to do so.)
       def suppress_link?(item)
-        item.url.nil?
+        item.url.nil? or item.disable_item
       end
 
       # determine and return link or static content depending on
