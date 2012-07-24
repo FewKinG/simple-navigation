@@ -16,6 +16,9 @@ module SimpleNavigation
           if include_sub_navigation?(item)
             li_content << render_sub_navigation_for(item)
           end
+	  if item.disable_item
+	    li_options[:class] = "#{li_options[:class]} disabled"
+	  end
           list << content_tag(:li, li_content, li_options)
         end.join
         if skip_if_empty? && item_container.empty?

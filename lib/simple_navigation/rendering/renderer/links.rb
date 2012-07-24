@@ -12,11 +12,15 @@ module SimpleNavigation
     #
     class Links < SimpleNavigation::Renderer::Base
       def render(item_container)
-        div_content = item_container.items.inject([]) do |list, item|
-          list << tag_for(item)
-        end.join
-	dom_class = "#{item_container.dom_class} #{item_container.should_disable_item? ? "disbaled" : ""}"
-        content_tag(:div, div_content, {:id => item_container.dom_id, :class => dom_class)
+	unless item_container.should_disable_item?
+          div_content = item_container.items.inject([]) do |list, item|
+	    list << tag_for(item)
+	  end.join
+	else
+	  div_content = ""
+	end
+	dom_class = "#{item_container.dom_class} #{item_container.should_disable_item? ? "disabled" : ""}"
+        content_tag(:div, div_content, {:id => item_container.dom_id, :class => dom_class})
       end
 
       protected
