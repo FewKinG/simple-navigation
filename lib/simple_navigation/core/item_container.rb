@@ -120,6 +120,10 @@ module SimpleNavigation
       items.empty?
     end
 
+    def should_disable_item?(options) #:nodoc:
+      [options.delete(:disable)].flatten.compact.any? { |m| evaluate_method(m) }
+    end
+
     private
 
     def selected_sub_navigation?

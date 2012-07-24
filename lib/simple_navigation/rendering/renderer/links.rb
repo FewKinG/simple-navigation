@@ -15,7 +15,8 @@ module SimpleNavigation
         div_content = item_container.items.inject([]) do |list, item|
           list << tag_for(item)
         end.join
-        content_tag(:div, div_content, {:id => item_container.dom_id, :class => item_container.dom_class})
+	dom_class = "#{item_container.dom_class} #{item_container.should_disable_item? ? "disbaled" : ""}"
+        content_tag(:div, div_content, {:id => item_container.dom_id, :class => dom_class)
       end
 
       protected
